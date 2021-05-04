@@ -1,5 +1,6 @@
 stages:
   - build
+  - deploy
 
 build_branch:
   image: docker:19.03.12
@@ -12,3 +13,11 @@ build_branch:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
+
+deploy_branch:
+  image: tmaier/docker-compose:latest
+  stage: deploy
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker-compose up
