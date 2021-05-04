@@ -2,3 +2,5 @@ version: "3.8"
 services:
   webapp:
     image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+    ports:
+    - 80:80
